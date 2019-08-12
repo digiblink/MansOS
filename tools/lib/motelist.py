@@ -199,7 +199,11 @@ class Motelist(object):
             # this filters out fake motes on linux, i hope!
             if mote[2] == "n/a":
                 continue
-                
+            
+            # this filters out some ACPI devices
+            if "ACPI" in mote[2]:
+                continue
+
             newMote = Mote(mote)
     
             for m in newMotes:
@@ -345,6 +349,10 @@ class Motelist(object):
             return False
 
     @staticmethod
+    def getMotesByName(name):
+        return list(m for m in Motelist.getMotelist(True) if name in m.getName())
+
+    @staticmethod
     def printMotelist():
         motelist = Motelist.getMotelist(True)
 
@@ -380,7 +388,6 @@ class Motelist(object):
                                            mote.getHost().ljust(lengths[2]),
                                            mote.getName().ljust(lengths[3])))
 
-
 def main():
     for arg in sys.argv[1:]:
         if arg == "-c":
@@ -392,6 +399,7 @@ def main():
             sys.exit(1)
     
     Motelist.printMotelist()
+    
 
 
 if __name__ == '__main__':

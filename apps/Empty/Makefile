@@ -21,23 +21,27 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+# --------------------------------------------------------------------
+#	Makefile for the sample application
+#
+#  The developer must define at least SOURCES and APPMOD in this file
+#
+#  In addition, PROJDIR and MOSROOT must be defined, before including 
+#  the main Makefile at ${MOSROOT}/mos/make/Makefile
+# --------------------------------------------------------------------
 
-#############################################
-# PC (native) platform
-#############################################
+# Sources are all project source files, excluding MansOS files
+SOURCES = main.c
 
-#############################################
-# Define platform variables
+# Module is the name of the main module built by this makefile
+APPMOD = EmptyApp
 
-ARCH = pc
-# code needs this
-CPU_MHZ ?= 4
+# --------------------------------------------------------------------
+# Set the key variables
+PROJDIR = $(CURDIR)
+ifndef MOSROOT
+  MOSROOT = $(PROJDIR)/../..
+endif
 
-CFLAGS += -DPLATFORM_PC=1 -std=gnu89
-LDFLAGS += -std=gnu89
-
-#############################################
-# Define platform-specific sources
-# (excluding architecture-specific sources)
-
-PSOURCES += $(MOS)/platforms/pc/platform.c
+# Include the main makefile
+include ${MOSROOT}/mos/make/Makefile

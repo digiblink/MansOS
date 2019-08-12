@@ -21,22 +21,12 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef PC_BEEPER_HAL_H
-#define PC_BEEPER_HAL_H
+//-------------------------------------------
+// Empty - demo application that compiles and does nothing
+//-------------------------------------------
 
-#include <lib/dprint.h>
+#include "stdmansos.h"
 
-#define beeperInit()  
-#define beeperToggle() PRINTF("beep!\n")
-
-// static 
-inline void beeperBeep(uint16_t ms) {
-    PRINTF("beep for %u ms in the default frequency\n", ms);
+void appMain(void)
+{
 }
-
-// static 
-inline void beeperBeepEx(uint16_t ms, uint16_t frequency) {
-    PRINTF("beep for %u ms in %u Hz frequency\n", ms, frequency);
-}
-
-#endif
